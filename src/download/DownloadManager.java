@@ -30,9 +30,9 @@ public class DownloadManager {
         ExecutorService pool = Executors.newFixedThreadPool(httpCommunicationThreads);
         while (fileSize > downloadFrom) {
             if (downloadTo == fileSize)
-                pool.submit(new DownloadInChunks(downloadFrom, -1, url));
+                pool.submit(new ChunkDownloader(downloadFrom, -1, url));
             else
-                pool.submit(new DownloadInChunks(downloadFrom, downloadTo, url));
+                pool.submit(new ChunkDownloader(downloadFrom, downloadTo, url));
             downloadFrom = downloadTo;
             if (downloadTo + chunkSize <= fileSize)
                 downloadTo = downloadTo + chunkSize;

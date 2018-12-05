@@ -1,18 +1,18 @@
 package download;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class DownloadInChunks implements Runnable {
+public class ChunkDownloader implements Runnable {
     private String fileURL ;
     private int downloadStartingByte;
     private int downloadEndingByte;
     private int IOthreads = 2;
 
-    public DownloadInChunks(int downloadStartingByte, int downloadEndingByte,String fileURL) {
+    public ChunkDownloader(int downloadStartingByte, int downloadEndingByte, String fileURL) {
         this.downloadStartingByte = downloadStartingByte;
         this.downloadEndingByte = downloadEndingByte;
         this.fileURL = fileURL;

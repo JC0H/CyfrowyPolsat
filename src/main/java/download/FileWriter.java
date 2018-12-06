@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class FileWriter implements Runnable {
     private int downloadedStartingByte;
@@ -41,7 +38,6 @@ public class FileWriter implements Runnable {
         file.close();
     }
 
-    @Override
     public void run() {
         try {
             writeToFile(downloadedStartingByte,connection);

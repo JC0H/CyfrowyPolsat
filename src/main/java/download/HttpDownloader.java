@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpDownloader /*implements Runnable*/{
+public class HttpDownloader {
     private String fileURL;
     private int downloadStartingByte;
     private String downloadEndingByte;

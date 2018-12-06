@@ -3,26 +3,17 @@ package download;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class DownloadManager {
-    private String url;
-    private int chunkSize;
+    private static String url;
+    private static int chunkSize;
     private int httpCommunicationThreads= 6;
 
-    private void execute() throws IOException, InterruptedException {
-        System.out.print("Type URL to download: ");
-        Scanner scan = new Scanner(System.in);
-        url = scan.nextLine();
-
-        System.out.println ("Chunk size : ");
-        chunkSize =scan.nextInt();
-
-        System.out.println(new Date());
+    public void execute(String url, int chunkSize) throws IOException, InterruptedException {
         int downloadFrom = 0;
         int downloadTo = chunkSize;
         int fileSize = getFileSize(url);
@@ -43,7 +34,7 @@ public class DownloadManager {
         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
     }
 
-    private static int getFileSize(String endpoint) throws IOException {
+    public static int getFileSize(String endpoint) throws IOException {
         URL url = new URL(endpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.connect();
@@ -56,6 +47,12 @@ public class DownloadManager {
     }
 
     public static void main(String s[]) throws IOException, InterruptedException {
-        new DownloadManager().execute();
+        System.out.print("Type URL to main.java.download: ");
+        Scanner scan = new Scanner(System.in);
+        url = scan.nextLine();
+
+        System.out.println ("Chunk size : ");
+        chunkSize =scan.nextInt();
+        new DownloadManager().execute(url,chunkSize);
     }
 }
